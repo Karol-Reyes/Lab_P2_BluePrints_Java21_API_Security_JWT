@@ -30,7 +30,7 @@ Content-Type: application/json
 }
 ```
 
-![alt text](postEndPoint.png)
+![alt text](photos/postEndPoint.png)
 La respuesta incluye un `access_token`. Ese valor se envia en las siguientes solicitudes usando `Authorization: Bearer <token>`.
 
 ## Endpoints protegidos
@@ -51,7 +51,7 @@ GET http://localhost:8080/api/blueprints
 Authorization: Bearer <token_generado>
 ```
 
-![alt text](AvailableAuthorizations.png)
+![alt text](photos/AvailableAuthorizations.png)
 
 Ejemplo para crear:
 
@@ -65,7 +65,7 @@ Content-Type: application/json
 }
 ```
 
-![alt text](endPointAuth.png)
+![alt text](photos/endPointAuth.png)
 
 ## Otras rutas
 
