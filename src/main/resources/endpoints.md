@@ -30,7 +30,7 @@ Content-Type: application/json
 }
 ```
 
-![alt text](postEndPoints.png)
+![alt text](postEndPoint.png)
 La respuesta incluye un `access_token`. Ese valor se envia en las siguientes solicitudes usando `Authorization: Bearer <token>`.
 
 ## Endpoints protegidos
