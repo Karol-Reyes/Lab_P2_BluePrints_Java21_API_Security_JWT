@@ -25,11 +25,12 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-	"username": "morenorodriguez",
-	"password": "mr123"
+	"username": "student",
+	"password": "student123"
 }
 ```
 
+![alt text](photos/postEndPoint.png)
 La respuesta incluye un `access_token`. Ese valor se envia en las siguientes solicitudes usando `Authorization: Bearer <token>`.
 
 ## Endpoints protegidos
@@ -47,20 +48,24 @@ Ejemplo para consultar:
 
 ```
 GET http://localhost:8080/api/blueprints
-Authorization: Bearer <ACCESS_TOKEN>
+Authorization: Bearer <token_generado>
 ```
+
+![alt text](photos/AvailableAuthorizations.png)
 
 Ejemplo para crear:
 
 ```
 POST http://localhost:8080/api/blueprints
-Authorization: Bearer <ACCESS_TOKEN>
+Authorization: Bearer <token_generado>
 Content-Type: application/json
 
 {
-	"name": "Nuevo plano"
+	"name": "Moreno Rodriguez"
 }
 ```
+
+![alt text](photos/endPointAuth.png)
 
 ## Otras rutas
 
