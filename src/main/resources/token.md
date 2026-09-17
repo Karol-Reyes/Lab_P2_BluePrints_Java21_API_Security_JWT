@@ -61,9 +61,9 @@ Las claims tendran una forma parecida a esta:
 }
 ```
 
-![generar token](tokenAnalisist.png)
+![generar token](photos/tokenAnalisist.png)
 
-![respuesta token](tokenSearch.png)
+![respuesta token](photos/tokenSearch.png)
 
 Los valores `iat` y `exp` cambian cada vez que se genera un token. El valor `sub` cambia si se inicia sesion con otro usuario valido. El `scope` permite que el servidor sepa si el usuario puede consultar o crear blueprints.
 
