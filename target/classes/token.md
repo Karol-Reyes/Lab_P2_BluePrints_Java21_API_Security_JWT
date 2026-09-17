@@ -1,19 +1,18 @@
-# Actividad 2: flujo de login y claims del JWT
+# 2: flujo de login y claims del JWT
 
 El login es el primer paso para poder usar los endpoints protegidos. El usuario envia sus credenciales a `/auth/login`. Si son correctas, la aplicacion genera un token JWT y lo devuelve en la respuesta.
 
 ## Flujo del login
 
-1. Se envia el nombre de usuario y la contrasena.
+1. Se envia el nombre de usuario y la contraseña.
 2. La aplicacion comprueba que el usuario exista y que la contrasena sea correcta.
 3. Si los datos son validos, se crea el token.
 4. El token se envia en el encabezado `Authorization` para consultar o crear blueprints.
 
-Solicitud de ejemplo:
+Ejemplo:
 
-```http
+```
 POST http://localhost:8080/auth/login
-Content-Type: application/json
 
 {
 	"username": "student",
@@ -21,9 +20,9 @@ Content-Type: application/json
 }
 ```
 
-La respuesta tiene esta forma:
+La respuesta tiene esta estructura generalmente:
 
-```json
+```
 {
 	"access_token": "eyJhbGciOiJSUzI1NiIs...",
 	"token_type": "Bearer",
@@ -31,21 +30,20 @@ La respuesta tiene esta forma:
 }
 ```
 
-El valor importante es `access_token`. Debes copiarlo en Swagger, usando el boton **Authorize**, o enviarlo desde Postman.
+![imagen](photos/postEndPoint.png)
 
 ## Claims del token
 
-Un JWT tiene informacion interna llamada *claims*. En este proyecto se generan las siguientes:
+Un JWT tiene informacion interna llamada *claims*. En este caso se nos generan los siguientes:
 
 | Claim | Significado |
 | --- | --- |
 | `iss` | Indica quien emitio el token: `https://decsis-eci/blueprints`. |
 | `iat` | Indica el momento en que se creo el token. |
-| `exp` | Indica cuando deja de ser valido. Dura 3600 segundos, aproximadamente una hora. |
+| `exp` | Indica cuando deja de ser valido. Dura 3600 segundos, osea una hora. |
 | `sub` | Indica el usuario que inicio sesion, por ejemplo `student`. |
 | `scope` | Indica las acciones permitidas: `blueprints.read` y `blueprints.write`. |
 
-El encabezado del token tambien indica que usa el algoritmo `RS256`. Esto permite que la API compruebe que el token fue firmado correctamente y que no fue alterado.
 
 ## Como revisar las claims
 
@@ -53,7 +51,7 @@ Despues de ejecutar el login, copia el valor completo de `access_token` y pegalo
 
 Las claims tendran una forma parecida a esta:
 
-```json
+```
 {
 	"iss": "https://decsis-eci/blueprints",
 	"iat": 1726483200,
@@ -62,6 +60,10 @@ Las claims tendran una forma parecida a esta:
 	"scope": "blueprints.read blueprints.write"
 }
 ```
+
+![generar token](photos/tokenAnalisist.png)
+
+![respuesta token](photos/tokenSearch.png)
 
 Los valores `iat` y `exp` cambian cada vez que se genera un token. El valor `sub` cambia si se inicia sesion con otro usuario valido. El `scope` permite que el servidor sepa si el usuario puede consultar o crear blueprints.
 

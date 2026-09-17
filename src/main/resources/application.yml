@@ -14,3 +14,13 @@ blueprints:
   security:
     issuer: "https://decsis-eci/blueprints"
     token-ttl-seconds: 3600
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/BluePrints
+    username: MorenoRodriguez
+    password: JDKX240524
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:init.sql
