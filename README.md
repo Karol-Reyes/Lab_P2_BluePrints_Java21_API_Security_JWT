@@ -112,6 +112,7 @@ src/main/resources/
 [AQUI](src/main/resources/endpoints.md)
 
 2. Explorar el flujo de login y analizar las claims del JWT emitido.
+[AQUI](src/main/resources/token.md)
 3. Extender los scopes (`blueprints.read`, `blueprints.write`) para controlar otros endpoints de la API, del laboratorio P1 trabajado.
 4. Modificar el tiempo de expiración del token y observar el efecto.
 5. Documentar en Swagger los endpoints de autenticación y de negocio.
