@@ -5,6 +5,11 @@ import co.edu.eci.blueprints.model.Point;
 import co.edu.eci.blueprints.persistence.BlueprintNotFoundException;
 import co.edu.eci.blueprints.persistence.BlueprintPersistenceException;
 import co.edu.eci.blueprints.services.BlueprintsServices;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,6 +19,8 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/blueprints")
+@Tag(name = "Blueprints", description = "Endpoints de negocio protegidos por scopes")
+@SecurityRequirement(name = "bearer-jwt")
 public class BlueprintController {
 
     private final BlueprintsServices services;
@@ -22,12 +29,23 @@ public class BlueprintController {
         this.services = services;
     }
 
+    @Operation(summary = "Lista todos los blueprints", description = "Requiere el scope blueprints.read")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Consulta exitosa"),
+        @ApiResponse(responseCode = "403", description = "Token sin el scope blueprints.read")
+    })
     @GetMapping
     @PreAuthorize("hasAuthority('SCOPE_blueprints.read')")
     public Set<Blueprint> list() {
         return services.getAllBlueprints();
     }
 
+    @Operation(summary = "Lista los blueprints de un autor", description = "Requiere el scope blueprints.read")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Consulta exitosa"),
+        @ApiResponse(responseCode = "403", description = "Token sin el scope blueprints.read"),
+        @ApiResponse(responseCode = "404", description = "Autor sin blueprints registrados")
+    })
     // traido del anterior lab
     @GetMapping("/{author}")
     @PreAuthorize("hasAuthority('SCOPE_blueprints.read')")
@@ -39,6 +57,12 @@ public class BlueprintController {
         }
     }
 
+    @Operation(summary = "Obtiene un blueprint específico", description = "Requiere el scope blueprints.read")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Consulta exitosa"),
+        @ApiResponse(responseCode = "403", description = "Token sin el scope blueprints.read"),
+        @ApiResponse(responseCode = "404", description = "Blueprint no encontrado")
+    })
     // traido del anterior lab
     @GetMapping("/{author}/{name}")
     @PreAuthorize("hasAuthority('SCOPE_blueprints.read')")
@@ -50,6 +74,12 @@ public class BlueprintController {
         }
     }
 
+    @Operation(summary = "Crea un nuevo blueprint", description = "Requiere el scope blueprints.write")
+    @ApiResponses({
+        @ApiResponse(responseCode = "201", description = "Blueprint creado"),
+        @ApiResponse(responseCode = "400", description = "Datos inválidos o blueprint duplicado"),
+        @ApiResponse(responseCode = "403", description = "Token sin el scope blueprints.write")
+    })
     // traido del anterior lab
     @PostMapping
     @PreAuthorize("hasAuthority('SCOPE_blueprints.write')")
@@ -63,6 +93,12 @@ public class BlueprintController {
         }
     }
 
+    @Operation(summary = "Agrega un punto a un blueprint existente", description = "Requiere el scope blueprints.write")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Punto agregado"),
+        @ApiResponse(responseCode = "403", description = "Token sin el scope blueprints.write"),
+        @ApiResponse(responseCode = "404", description = "Blueprint no encontrado")
+    })
     // traido del anterior lab
     @PostMapping ("/{author}/{name}/points")
     @PreAuthorize ("hasAuthority('SCOPE_blueprints.write')")
