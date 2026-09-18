@@ -32,4 +32,22 @@ Los exactos 30 segundos que esperabamos.
 
 ---
 
-# 5. Swagger
+# 5. Documentación Swagger
+
+Los cambios que se realizaron para hacer la documentación con Swagger se encuentran presentes en:
+
+- La clase de [Autenticación](/src/main/java/co/edu/eci/blueprints/auth/AuthController.java)
+- La clase de los [Controladores de endpoints](/src/main/java/co/edu/eci/blueprints/api/BlueprintController.java)
+
+Las etiquetas usadas fueron:
+
+| Etiqueta | Razón |
+| --- | --- |
+| @Tag(name, description) | agrupa los endpoints en Swagger UI bajo un encabezad, para verlos como dos secciones separadas, en vez de una lista plana. |
+| @Operation(summary, description) | es el título y subtítulo que aparece en cada endpoint dentro de Swagger UI |
+| @ApiResponses & @ApiResponse | documentan todos los códigos posibles de cada endpoint |
+| @SecurityRequirement(name = "bearer-jwt") | le dice a Swagger que todos los endpoints de ese controller necesitan el candado de autorización |
+
+Ahora, con esto implementado, los endpoints aparecen con su respectiva descripción y se presenta de la siguiente manera:
+
+![](/src/main/resources/photos/swagger.png)
