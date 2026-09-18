@@ -124,6 +124,8 @@ src/main/resources/
 4. Modificar el tiempo de expiración del token y observar el efecto.
 5. Documentar en Swagger los endpoints de autenticación y de negocio.
 
+- Respuesta a ambos puntos [AQUÍ](/src/main/resources/token&Swagger.md)
+
 ---
 
 ## Lecturas recomendadas
